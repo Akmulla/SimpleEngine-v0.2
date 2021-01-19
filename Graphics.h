@@ -14,7 +14,6 @@ public:
 	Graphics(HWND hwnd);
 	~Graphics();
 	void ClearBackground(const ColorRGBA);
-	void RenderGameObject(const GameObject&);
 	void EndFrame();
 private:
 	ID3D11Device* pDevice = nullptr;

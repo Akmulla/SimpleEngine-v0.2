@@ -10,6 +10,7 @@ Window* Window::mainWindow;
 Window::Window(HINSTANCE hInstance)
 {
 	Window::mainWindow = this;
+
 	const auto winClassName = "SimpleExampleWindowClass";
 	WNDCLASSEX wc = { };
 	wc.cbSize = sizeof(wc);
@@ -43,6 +44,15 @@ Window::Window(HINSTANCE hInstance)
 
 	this->graphics = std::unique_ptr<Graphics>(new Graphics(hwnd));
 
-
 	ShowWindow(hwnd, SW_SHOW);
+}
+
+Window::~Window()
+{
+
+}
+
+Window* Window::GetMainWindow()
+{
+	return nullptr;
 }

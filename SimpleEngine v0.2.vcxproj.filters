@@ -39,6 +39,12 @@
     <ClInclude Include="Input.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="IPhysical.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
