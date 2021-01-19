@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>
 #include "Graphics.h"
+#include "Input.h"
 
 class Window
 {

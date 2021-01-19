@@ -2,6 +2,44 @@
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (uMsg == WM_KEYDOWN)
+	{
+		switch (wParam)
+		{
+		case VK_UP:
+			Input::SetVerticalAxis(1);
+			break;
+		case VK_DOWN:
+			Input::SetVerticalAxis(-1);
+			break;
+		case VK_RIGHT:
+			Input::SetHorizontalAxis(1);
+			break;
+		case VK_LEFT:
+			Input::SetHorizontalAxis(-1);
+			break;
+		}
+	}
+	else
+		if (uMsg == WM_KEYUP)
+		{
+			switch (wParam)
+			{
+			case VK_UP:
+				Input::SetHorizontalAxis(0);
+				break;
+			case VK_DOWN:
+				Input::SetHorizontalAxis(0);
+				break;
+			case VK_RIGHT:
+				Input::SetHorizontalAxis(0);
+				break;
+			case VK_LEFT:
+				Input::SetHorizontalAxis(0);
+				break;
+			}
+		}
+
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
@@ -54,5 +92,5 @@ Window::~Window()
 
 Window* Window::GetMainWindow()
 {
-	return nullptr;
+	return mainWindow;
 }
