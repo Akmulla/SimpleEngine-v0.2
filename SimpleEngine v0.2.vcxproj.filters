@@ -10,6 +10,7 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxCollider.h">
@@ -37,6 +38,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IPhysical.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderable.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

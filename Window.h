@@ -5,12 +5,14 @@
 #include <string>
 #include <memory>
 #include "Graphics.h"
+#include "Input.h"
 
 class Window
 {
 public:
 	Window(HINSTANCE);
 	~Window();
+	void DrawWindow();
 	static Window* GetMainWindow();
 private:
 	static Window* mainWindow;
