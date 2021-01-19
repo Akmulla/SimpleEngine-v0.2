@@ -90,6 +90,14 @@ Window::~Window()
 
 }
 
+void Window::DrawWindow()
+{
+	ColorRGBA c{ 1,0,0,1 };
+	graphics->ClearBackground(c);
+
+	graphics->EndFrame();
+}
+
 Window* Window::GetMainWindow()
 {
 	return mainWindow;

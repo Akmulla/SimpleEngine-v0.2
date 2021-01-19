@@ -11,7 +11,7 @@ int CALLBACK WinMain(
 
 	while (true)
 	{
-
+		window.DrawWindow();
 	}
 
 	return 0;

@@ -12,6 +12,7 @@ class Window
 public:
 	Window(HINSTANCE);
 	~Window();
+	void DrawWindow();
 	static Window* GetMainWindow();
 private:
 	static Window* mainWindow;

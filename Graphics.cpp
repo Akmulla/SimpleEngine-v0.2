@@ -40,18 +40,18 @@ Graphics::Graphics(HWND hwnd)
 	pBackBuffer->Release();
 }
 
-
 Graphics::~Graphics()
 {
 
 }
 
-void Graphics::ClearBackground(const ColorRGBA)
+void Graphics::ClearBackground(const ColorRGBA colorRGBA)
 {
-
+	const float color[] = { colorRGBA.r,colorRGBA.g,colorRGBA.b,colorRGBA.a };
+	pContext->ClearRenderTargetView(pTarget.Get(), color);
 }
 
 void Graphics::EndFrame()
 {
-
+	pSwap->Present(1u, 0u);
 }
