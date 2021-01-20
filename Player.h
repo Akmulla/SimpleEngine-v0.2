@@ -6,5 +6,9 @@
 
 class Player : GameObject, IRenderable, IPhysical
 {
-
+public:
+	Player();
+	~Player();
+private:
+	Sprite sprite;
 };
