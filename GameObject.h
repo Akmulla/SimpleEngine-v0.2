@@ -5,6 +5,7 @@
 class GameObject : IRenderable
 {
 public:
+	virtual void Update(float dt) {};
 	void SetPosition(const DirectX::XMFLOAT3& pos);
 	void SetRotation(const DirectX::XMFLOAT3& rot);
 	void SetScale(const DirectX::XMFLOAT3& scale);

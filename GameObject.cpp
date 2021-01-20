@@ -1,5 +1,6 @@
 #include "GameObject.h"
 
+
 void GameObject::SetPosition(const DirectX::XMFLOAT3& pos)
 {
 

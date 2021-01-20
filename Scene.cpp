@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "GameObject.h"
 
 Scene::Scene()
 {
@@ -14,4 +15,8 @@ Scene::~Scene()
 
 void Scene::DoUpdate(float dt)
 {
+	for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
+	{
+		(*it)->Update(dt);
+	}
 }
