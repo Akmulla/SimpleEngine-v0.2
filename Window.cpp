@@ -94,7 +94,6 @@ void Window::DrawWindow()
 {
 	ColorRGBA c{ 1,0,0,1 };
 	graphics->ClearBackground(c);
-
 	graphics->EndFrame();
 }
 

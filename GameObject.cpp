@@ -29,3 +29,4 @@ const DirectX::XMFLOAT3& GameObject::GetScale() const
 {
     return scale;
 }
+

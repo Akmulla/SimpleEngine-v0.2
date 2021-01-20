@@ -1,7 +1,8 @@
 #pragma once
 #include <DirectXMath.h>
+#include "IRenderable.h"
 
-class GameObject
+class GameObject : IRenderable
 {
 public:
 	void SetPosition(const DirectX::XMFLOAT3& pos);
