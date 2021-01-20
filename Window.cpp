@@ -94,8 +94,25 @@ void Window::DrawWindow()
 {
 	ColorRGBA c{ 1,0,0,1 };
 	graphics->ClearBackground(c);
-
 	graphics->EndFrame();
+}
+
+int Window::UpdateWindowsMessages()
+{
+	MSG msg;
+
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		if (msg.message == WM_QUIT)
+		{
+			return msg.wParam;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return 0;
 }
 
 Window* Window::GetMainWindow()
