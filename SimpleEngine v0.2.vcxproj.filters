@@ -19,6 +19,9 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxCollider.h">
@@ -52,6 +55,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="IRenderable.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
