@@ -11,6 +11,7 @@ int CALLBACK WinMain(
 
 	while (true)
 	{
+		window.UpdateWindowsMessages();
 		window.DrawWindow();
 	}
 

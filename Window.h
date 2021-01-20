@@ -13,6 +13,7 @@ public:
 	Window(HINSTANCE);
 	~Window();
 	void DrawWindow();
+	int UpdateWindowsMessages();
 	static Window* GetMainWindow();
 private:
 	static Window* mainWindow;
