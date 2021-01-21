@@ -8,10 +8,11 @@
 class Sprite 
 {
 public:
-	Sprite(Graphics*, std::string spritePath, float width, float height);
+	Sprite(Graphics*, const wchar_t* spritePath, float width, float height);
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
-	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture;
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
 };
