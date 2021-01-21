@@ -3,6 +3,11 @@
 #include "Timer.h"
 #include "Scene.h"
 
+void InitScene(Scene& scene)
+{
+	
+}
+
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_opt_  HINSTANCE hPrevInstance,

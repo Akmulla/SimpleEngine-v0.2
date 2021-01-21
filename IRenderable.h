@@ -4,4 +4,5 @@
 class IRenderable
 {
 public:
-	virtual void Draw(Graphics& gfx) = 0;};
+	virtual void Draw(DirectX::XMMATRIX) = 0;
+};
