@@ -14,6 +14,8 @@ public:
 	~Graphics();
 	void ClearBackground(const ColorRGBA);
 	void EndFrame();
+	ID3D11Device* GetDevice();
+	ID3D11DeviceContext* GetContext();
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;

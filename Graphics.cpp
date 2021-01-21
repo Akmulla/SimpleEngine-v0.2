@@ -55,3 +55,13 @@ void Graphics::EndFrame()
 {
 	pSwap->Present(1u, 0u);
 }
+
+ID3D11Device* Graphics::GetDevice()
+{
+	return pDevice.Get();
+}
+
+ID3D11DeviceContext* Graphics::GetContext()
+{
+	return pContext.Get();
+}

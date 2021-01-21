@@ -12,4 +12,6 @@ public:
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+	ID3D11Device* device;
+	ID3D11DeviceContext* context;
 };
