@@ -8,6 +8,8 @@ void InitScene(Scene& scene)
 {
 	Player* player = new Player();
 	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"player.png", 100,100);
+
+	scene.gameObjects.push_back(player);
 }
 
 int CALLBACK WinMain(

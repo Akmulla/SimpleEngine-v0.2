@@ -5,12 +5,12 @@
 #include "IPhysical.h"
 #include <string>
 
-class Player : GameObject, IRenderable, IPhysical
+class Player : public GameObject, IRenderable, IPhysical
 {
 public:
 	Player();
 	~Player();
-	void Draw(DirectX::XMFLOAT2);
+	void Draw();
 	void Update(float dt) override;
 	void AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height);
 private:

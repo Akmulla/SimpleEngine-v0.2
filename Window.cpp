@@ -98,6 +98,8 @@ void Window::DrawWindow(Scene& scene)
 	for (auto it = scene.gameObjects.begin(); it != scene.gameObjects.end(); ++it)
 	{
 		IRenderable* renderable = dynamic_cast<IRenderable*>(*it);
+		if (renderable)
+			renderable->Draw();
 	}
 
 	graphics->EndFrame();
