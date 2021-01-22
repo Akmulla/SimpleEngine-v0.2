@@ -9,7 +9,7 @@
 class Sprite 
 {
 public:
-	Sprite(Graphics*, const wchar_t* spritePath, float width, float height);
+	Sprite(Graphics&, const wchar_t* spritePath, float width, float height);
 	void Draw(DirectX::XMFLOAT2);
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();

@@ -2,7 +2,7 @@
 #include <DirectXMath.h>
 #include "IRenderable.h"
 
-class GameObject : IRenderable
+class GameObject
 {
 public:
 	virtual void Update(float dt) = 0;
