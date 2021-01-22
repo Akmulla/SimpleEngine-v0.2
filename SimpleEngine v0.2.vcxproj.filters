@@ -75,4 +75,7 @@
       <UniqueIdentifier>{0f2ea85d-d9f6-4d64-bc5a-5cf194eaf930}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="player.png" />
+  </ItemGroup>
 </Project>

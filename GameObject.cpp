@@ -1,6 +1,10 @@
 #include "GameObject.h"
 
 
+//void GameObject::Update(float dt)
+//{
+//}
+
 void GameObject::SetPosition(const DirectX::XMFLOAT3& pos)
 {
     this->pos = pos;

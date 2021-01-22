@@ -6,14 +6,18 @@
 #include <memory>
 #include "Graphics.h"
 #include "Input.h"
+#include "Scene.h"
+#include "IRenderable.h"
+#include "GameObject.h"
 
 class Window
 {
 public:
 	Window(HINSTANCE);
 	~Window();
-	void DrawWindow();
+	void DrawWindow(Scene&);
 	int UpdateWindowsMessages();
+	Graphics* GetGraphics();
 	static Window* GetMainWindow();
 private:
 	static Window* mainWindow;

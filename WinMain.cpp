@@ -2,10 +2,12 @@
 #include "Window.h"
 #include "Timer.h"
 #include "Scene.h"
+#include "Player.h"
 
 void InitScene(Scene& scene)
 {
-	
+	Player* player = new Player();
+	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"player.png", 100,100);
 }
 
 int CALLBACK WinMain(
@@ -18,6 +20,8 @@ int CALLBACK WinMain(
 	Scene mainScene;
 	Window window(hInstance);
 
+	InitScene(mainScene);
+
 	while (true)
 	{
 		float dt = timer.Mark();
@@ -26,7 +30,7 @@ int CALLBACK WinMain(
 
 		mainScene.DoUpdate(dt);
 
-		window.DrawWindow();
+		window.DrawWindow(mainScene);
 	}
 
 	return 0;

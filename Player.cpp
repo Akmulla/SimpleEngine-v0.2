@@ -15,6 +15,10 @@ void Player::Draw(DirectX::XMFLOAT2 pos)
 	sprite->Draw(pos);
 }
 
+void Player::Update(float dt)
+{
+}
+
 void Player::AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height)
 {
 	sprite = new Sprite(gfx, spritePath, width, height);

@@ -90,10 +90,16 @@ Window::~Window()
 
 }
 
-void Window::DrawWindow()
+void Window::DrawWindow(Scene& scene)
 {
 	ColorRGBA c{ 1,0,0,1 };
 	graphics->ClearBackground(c);
+
+	for (auto it = scene.gameObjects.begin(); it != scene.gameObjects.end(); ++it)
+	{
+		IRenderable* renderable = dynamic_cast<IRenderable*>(*it);
+	}
+
 	graphics->EndFrame();
 }
 
@@ -113,6 +119,11 @@ int Window::UpdateWindowsMessages()
 	}
 
 	return 0;
+}
+
+Graphics* Window::GetGraphics()
+{
+	return graphics.get();
 }
 
 Window* Window::GetMainWindow()

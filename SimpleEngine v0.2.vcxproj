@@ -43,6 +43,9 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="player.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <RootNamespace>SimpleEngine_v0_2</RootNamespace>
     <ProjectGuid>{c6fcd3cd-b97a-458d-9150-9561eba1d7bc}</ProjectGuid>
