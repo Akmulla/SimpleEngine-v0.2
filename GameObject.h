@@ -7,15 +7,15 @@ class GameObject
 public:
 	virtual void Update(float dt) = 0;
 
-	void SetPosition(const DirectX::XMFLOAT2& pos);
-	void SetRotation(const DirectX::XMFLOAT2& rot);
-	void SetScale(const DirectX::XMFLOAT2& scale);
+	void SetPosition(const DirectX::XMFLOAT3& pos);
+	void SetRotation(const DirectX::XMFLOAT3& rot);
+	void SetScale(const DirectX::XMFLOAT3& scale);
 
-	const DirectX::XMFLOAT2& GetPosition() const;
-	const DirectX::XMFLOAT2& GetRotation() const;
-	const DirectX::XMFLOAT2& GetScale() const;
-protected:
-	DirectX::XMFLOAT2 pos;
-	DirectX::XMFLOAT2 rot;
-	DirectX::XMFLOAT2 scale;
+	const DirectX::XMFLOAT3& GetPosition() const;
+	const DirectX::XMFLOAT3& GetRotation() const;
+	const DirectX::XMFLOAT3& GetScale() const;
+private:
+	DirectX::XMFLOAT3 pos;
+	DirectX::XMFLOAT3 rot;
+	DirectX::XMFLOAT3 scale;
 };

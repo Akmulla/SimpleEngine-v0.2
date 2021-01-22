@@ -10,7 +10,7 @@ Player::~Player()
 	delete sprite;
 }
 
-void Player::Draw()
+void Player::Draw(DirectX::XMFLOAT2 pos)
 {
 	sprite->Draw(pos);
 }
