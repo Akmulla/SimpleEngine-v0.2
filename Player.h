@@ -5,7 +5,7 @@
 #include "IPhysical.h"
 #include <string>
 
-class Player : GameObject, IRenderable, IPhysical
+class Player : GameObject, public IRenderable, IPhysical
 {
 public:
 	Player();

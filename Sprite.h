@@ -4,6 +4,8 @@
 #include <WICTextureLoader.h>
 #include <string>
 #include <SpriteBatch.h>
+#include <vector>
+#include "Vertex2D.h"
 #pragma comment(lib,"DirectXTK.lib")
 
 class Sprite 
@@ -13,7 +15,6 @@ public:
 	void Draw(DirectX::XMFLOAT2);
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
-	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shaderResource;
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;

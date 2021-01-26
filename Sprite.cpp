@@ -8,7 +8,25 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	device = gfx.GetDevice();
 	context = gfx.GetContext();
 	
-	spriteBatch = std::make_unique<SpriteBatch>(context);
+	std::vector<Vertex2D> vertexData =
+	{
+		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
+		Vertex2D(0.5f, -0.5f, 0.0f, 1.0f, 0.0f), //TopRight
+		Vertex2D(-0.5, 0.5, 0.0f, 0.0f, 1.0f), //Bottom Left
+		Vertex2D(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
+	};
+
+	std::vector<DWORD> indexData =
+	{
+		0, 1, 2,
+		2, 1, 3
+	};
+
+	//HRESULT hr = vertices.Initialize(device, vertexData.data(), vertexData.size());
+
+	//hr = indices.Initialize(device, indexData.data(), indexData.size());
+
+	/*spriteBatch = std::make_unique<SpriteBatch>(context);
 	ComPtr<ID3D11Resource> resource;
 	CreateWICTextureFromFile(device, spritePath,resource.GetAddressOf(), shaderResource.ReleaseAndGetAddressOf());
 
@@ -16,14 +34,14 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	resource.As(&texture);
 
 	CD3D11_TEXTURE2D_DESC texDesc;
-	texture->GetDesc(&texDesc);
+	texture->GetDesc(&texDesc);*/
 }
 
 void Sprite::Draw(DirectX::XMFLOAT2 pos)
 {
-	spriteBatch->Begin();
+	/*spriteBatch->Begin();
 
 	spriteBatch->Draw(shaderResource.Get(), pos);
 
-	spriteBatch->End();
+	spriteBatch->End();*/
 }

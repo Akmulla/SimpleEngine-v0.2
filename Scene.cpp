@@ -11,6 +11,11 @@ Scene::~Scene()
 	{
 		delete (*it);
 	}
+
+	for (auto it = renderableObjects.begin(); it != renderableObjects.end(); ++it)
+	{
+		delete (*it);
+	}
 }
 
 void Scene::DoUpdate(float dt)

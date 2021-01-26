@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "IRenderable.h"
 
 class GameObject;
 
@@ -11,4 +12,5 @@ public:
 	~Scene();
 	void DoUpdate(float dt);
 	std::vector<GameObject*> gameObjects;
+	std::vector<IRenderable*> renderableObjects;
 };

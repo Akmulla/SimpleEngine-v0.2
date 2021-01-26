@@ -41,6 +41,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vertex2D.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
