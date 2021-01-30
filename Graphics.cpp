@@ -1,5 +1,4 @@
 #include "Graphics.h"
-//#include "dxstdafx.h"
 
 Graphics::Graphics(HWND hwnd)
 {
@@ -71,7 +70,7 @@ Graphics::Graphics(HWND hwnd)
 		m_pTarget.GetAddressOf()
 	);
 
-
+	OutputDebugString("\nRender Target view initialized\n\n");
 }
 
 Graphics::~Graphics()
