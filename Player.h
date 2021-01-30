@@ -1,16 +1,15 @@
 #pragma once
+#include "GameObject.h"
 #include "BoxCollider.h"
 #include "Sprite.h"
-#include "IRenderable.h"
-#include "IPhysical.h"
 #include <string>
 
-class Player : GameObject, public IRenderable, IPhysical
+class Player : public GameObject
 {
 public:
 	Player();
 	~Player();
-	void Draw(DirectX::XMFLOAT2);
+	void Draw() override;
 	void Update(float dt) override;
 	void AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height);
 private:

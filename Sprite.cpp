@@ -37,7 +37,7 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	texture->GetDesc(&texDesc);*/
 }
 
-void Sprite::Draw(DirectX::XMFLOAT2 pos)
+void Sprite::Draw()
 {
 	/*spriteBatch->Begin();
 

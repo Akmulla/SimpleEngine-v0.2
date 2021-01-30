@@ -1,11 +1,11 @@
 #pragma once
 #include <DirectXMath.h>
-#include "IRenderable.h"
 
 class GameObject
 {
 public:
 	virtual void Update(float dt) = 0;
+	virtual void Draw() = 0;
 
 	void SetPosition(const DirectX::XMFLOAT3& pos);
 	void SetRotation(const DirectX::XMFLOAT3& rot);

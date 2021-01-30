@@ -97,7 +97,7 @@ void Window::DrawWindow(Scene& scene)
 
 	for (auto it = scene.gameObjects.begin(); it != scene.gameObjects.end(); ++it)
 	{
-		IRenderable* renderable = dynamic_cast<IRenderable*>(*it);
+		(*it)->Draw();
 	}
 
 	graphics->EndFrame();

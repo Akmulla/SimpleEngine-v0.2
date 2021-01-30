@@ -3,6 +3,8 @@
 
 Graphics::Graphics(HWND hwnd)
 {
+	HRESULT hr = S_OK;
+
 	DXGI_SWAP_CHAIN_DESC sd;
 	sd.BufferDesc.Width = 0;
 	sd.BufferDesc.Height = 0;
@@ -19,7 +21,6 @@ Graphics::Graphics(HWND hwnd)
 	sd.Windowed = TRUE;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
-
 
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
@@ -64,31 +65,13 @@ Graphics::Graphics(HWND hwnd)
 		&m_viewport
 	);
 
-	m_pDevice->CreateRenderTargetView(
+	hr = m_pDevice->CreateRenderTargetView(
 		m_pBackBuffer.Get(),
 		nullptr,
 		m_pTarget.GetAddressOf()
 	);
 
-	//D3D11CreateDeviceAndSwapChain(
-	//	nullptr,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	nullptr,
-	//	0,
-	//	nullptr,
-	//	0,
-	//	D3D11_SDK_VERSION,
-	//	&sd,
-	//	&pSwap,
-	//	&pDevice,
-	//	nullptr,
-	//	&pContext
-	//);
 
-	//ID3D11Resource* pBackBuffer = nullptr;
-	//pSwap->GetBuffer(0, __uuidof(ID3D11Resource), reinterpret_cast<void**>(&pBackBuffer));
-	//pDevice->CreateRenderTargetView(pBackBuffer, nullptr, &pTarget);
-	//pBackBuffer->Release();
 }
 
 Graphics::~Graphics()

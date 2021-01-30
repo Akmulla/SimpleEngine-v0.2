@@ -9,7 +9,7 @@ void InitScene(Scene& scene)
 	Player* player = new Player();
 	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"player.png", 100,100);
 
-	scene.renderableObjects.push_back(static_cast<IRenderable*>(player));
+	scene.gameObjects.push_back(static_cast<GameObject*>(player));
 }
 
 int CALLBACK WinMain(

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Graphics.h"
 #include <memory>
 #include <WICTextureLoader.h>
 #include <string>
@@ -12,7 +13,7 @@ class Sprite
 {
 public:
 	Sprite(Graphics&, const wchar_t* spritePath, float width, float height);
-	void Draw(DirectX::XMFLOAT2);
+	void Draw();
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shaderResource;
