@@ -18,8 +18,12 @@ public:
 	ID3D11Device* GetDevice();
 	ID3D11DeviceContext* GetContext();
 private:
-	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
-	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
+	Microsoft::WRL::ComPtr <ID3D11Texture2D> m_pBackBuffer;
+	Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;
+	Microsoft::WRL::ComPtr<IDXGISwapChain> m_pSwap;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_pContext;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> m_pTarget;
+
+	D3D11_VIEWPORT          m_viewport;
+	D3D11_TEXTURE2D_DESC    m_bbDesc;
 };
