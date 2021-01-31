@@ -7,7 +7,6 @@
 #include "Graphics.h"
 #include "Input.h"
 #include "Scene.h"
-#include "IRenderable.h"
 #include "GameObject.h"
 
 class Window

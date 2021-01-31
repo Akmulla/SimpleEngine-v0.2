@@ -10,12 +10,13 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	device = gfx.GetDevice();
 	context = gfx.GetContext();
 	
-	hr =  CreateGeometry();
+	//hr =  CreateGeometry();
 
-	if (SUCCEEDED(hr))
+	if (SUCCEEDED(CreateGeometry()))
 		OutputDebugString("\nSprite geometry created\n\n");
 	
-
+	if (SUCCEEDED(CreateShaders()))
+		OutputDebugString("\nSprite shaders created\n\n");
 }
 
 HRESULT Sprite::CreateGeometry()
@@ -71,6 +72,26 @@ HRESULT Sprite::CreateGeometry()
 		&iData,
 		&m_pIndexBuffer
 	);
+
+	return hr;
+}
+
+HRESULT Sprite::CreateShaders()
+{
+	HRESULT hr = S_OK;
+
+	Microsoft::WRL::ComPtr<ID3DBlob> pBlob;
+
+	//Vertex shader
+
+	hr = D3DReadFileToBlob(L"VertexShader.cso", &pBlob);
+	if (FAILED(hr))
+	{
+		OutputDebugString("\nFailed to read shader cso file\n\n");
+		return hr;
+	}
+		
+	hr = device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pVertexShader);
 
 	return hr;
 }
