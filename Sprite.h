@@ -16,7 +16,15 @@ public:
 	void Draw();
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shaderResource;
+
+	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pVertexBuffer;
+	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pIndexBuffer;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout>       m_pInputLayout;
+	Microsoft::WRL::ComPtr<ID3D11PixelShader>       m_pPixelShader;
+	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pConstantBuffer;
+
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
+
+	HRESULT CreateGeometry();
 };

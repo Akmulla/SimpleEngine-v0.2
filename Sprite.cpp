@@ -2,13 +2,28 @@
 
 Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float height)
 {
+	HRESULT hr = S_OK;
+
 	using namespace Microsoft::WRL;
 	using namespace DirectX;
 
 	device = gfx.GetDevice();
 	context = gfx.GetContext();
 	
-	std::vector<Vertex2D> vertexData =
+	hr =  CreateGeometry();
+
+	if (SUCCEEDED(hr))
+		OutputDebugString("\nSprite geometry created\n\n");
+	
+
+}
+
+HRESULT Sprite::CreateGeometry()
+{
+	HRESULT hr = S_OK;
+
+	//Create vertices and vertex data
+	Vertex2D vertexData[] =
 	{
 		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
 		Vertex2D(0.5f, -0.5f, 0.0f, 1.0f, 0.0f), //TopRight
@@ -16,25 +31,49 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 		Vertex2D(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
 	};
 
-	std::vector<DWORD> indexData =
+	CD3D11_BUFFER_DESC vDesc(
+		sizeof(vertexData),
+		D3D11_BIND_VERTEX_BUFFER
+	);
+
+	D3D11_SUBRESOURCE_DATA vData;
+	ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
+	vData.pSysMem = vertexData;
+	vData.SysMemPitch = 0;
+	vData.SysMemSlicePitch = 0;
+
+	hr = device->CreateBuffer(
+		&vDesc,
+		&vData,
+		&m_pVertexBuffer
+	);
+
+
+	//Create indices and index data
+	UINT indexData[] =
 	{
 		0, 1, 2,
 		2, 1, 3
 	};
 
-	//HRESULT hr = vertices.Initialize(device, vertexData.data(), vertexData.size());
+	CD3D11_BUFFER_DESC iDesc(
+		sizeof(indexData),
+		D3D11_BIND_INDEX_BUFFER
+	);
 
-	//hr = indices.Initialize(device, indexData.data(), indexData.size());
+	D3D11_SUBRESOURCE_DATA iData;
+	ZeroMemory(&iData, sizeof(D3D11_SUBRESOURCE_DATA));
+	iData.pSysMem = indexData;
+	iData.SysMemPitch = 0;
+	iData.SysMemSlicePitch = 0;
 
-	/*spriteBatch = std::make_unique<SpriteBatch>(context);
-	ComPtr<ID3D11Resource> resource;
-	CreateWICTextureFromFile(device, spritePath,resource.GetAddressOf(), shaderResource.ReleaseAndGetAddressOf());
+	hr = device->CreateBuffer(
+		&iDesc,
+		&iData,
+		&m_pIndexBuffer
+	);
 
-	ComPtr<ID3D11Texture2D> texture;
-	resource.As(&texture);
-
-	CD3D11_TEXTURE2D_DESC texDesc;
-	texture->GetDesc(&texDesc);*/
+	return hr;
 }
 
 void Sprite::Draw()
