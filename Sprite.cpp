@@ -48,7 +48,6 @@ HRESULT Sprite::CreateGeometry()
 		&m_pVertexBuffer
 	);
 
-
 	//Create indices and index data
 	UINT indexData[] =
 	{
