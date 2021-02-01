@@ -27,10 +27,10 @@ HRESULT Sprite::CreateGeometry()
 	////////////////////Create vertices and vertex data
 	Vertex2D vertexData[] =
 	{
-		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
-		Vertex2D(0.5f, -0.5f, 0.0f, 1.0f, 0.0f), //TopRight
-		Vertex2D(-0.5, 0.5, 0.0f, 0.0f, 1.0f), //Bottom Left
-		Vertex2D(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
+		Vertex2D(-0.5f, -0.5f, 0.0f), 
+		Vertex2D(0.5f, -0.5f, 0.0f),
+		Vertex2D(-0.5f, 0.5, 0.0f),
+		Vertex2D(0.5, 0.5, 0.0f), 
 	};
 
 	CD3D11_BUFFER_DESC vertexBufferDesc;
@@ -45,6 +45,8 @@ HRESULT Sprite::CreateGeometry()
 	D3D11_SUBRESOURCE_DATA vertexBufferData;
 	ZeroMemory(&vertexBufferData, sizeof(vertexBufferData));
 	vertexBufferData.pSysMem = vertexData;
+	vertexBufferData.SysMemPitch = 0;
+	vertexBufferData.SysMemSlicePitch = 0;
 
 	hr = device->CreateBuffer(
 		&vertexBufferDesc,
@@ -55,8 +57,8 @@ HRESULT Sprite::CreateGeometry()
 	///////////////////////Create indices and index data
 	UINT indexData[] =
 	{
-		0, 1, 2,
-		2, 1, 3
+		0, 2, 1,
+		2, 3, 1
 	};
 
 	m_indexCount = ARRAYSIZE(indexData);
@@ -110,11 +112,10 @@ HRESULT Sprite::CreateShaders()
 
 	D3D11_INPUT_ELEMENT_DESC layout2D[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
-		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0  }
 	};
 
-	device->CreateInputLayout(layout2D,
+	hr = device->CreateInputLayout(layout2D,
 		(UINT)std::size(layout2D),
 		pBlob->GetBufferPointer(),
 		pBlob->GetBufferSize(),
@@ -152,7 +153,12 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		0,
 		0
 	);
-
+	//Set input layout
+	context->IASetInputLayout(m_pInputLayout.Get());
+	//Set render targets
+	context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
+	//Set primitive topology
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	// Set up the IA stage by setting the input topology and layout.
 	UINT stride = sizeof(Vertex2D);
 	UINT offset = 0;
@@ -172,12 +178,7 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 	);
 
 
-	//Set input layout
-	context->IASetInputLayout(m_pInputLayout.Get());
-	//Set render targets
-	context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
-	//Set primitive topology
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
 
 	// Set up the vertex shader stage.
 	context->VSSetShader(
