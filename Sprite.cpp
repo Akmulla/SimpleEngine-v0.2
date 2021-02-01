@@ -100,6 +100,17 @@ HRESULT Sprite::CreateShaders()
 
 	hr = device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pVertexShader);
 
+	D3D11_INPUT_ELEMENT_DESC layout2D[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0  }
+	};
+
+	hr = device->CreateInputLayout(layout2D,
+		(UINT)std::size(layout2D),
+		pBlob->GetBufferPointer(),
+		pBlob->GetBufferSize(),
+		&m_pInputLayout);
+
 
 	hr = D3DReadFileToBlob(L"PixelShader.cso", &pBlob);
 	if (FAILED(hr))
@@ -110,16 +121,6 @@ HRESULT Sprite::CreateShaders()
 
 	hr = device->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pPixelShader);
 
-	D3D11_INPUT_ELEMENT_DESC layout2D[] =
-	{
-		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0  }
-	};
-
-	hr = device->CreateInputLayout(layout2D,
-		(UINT)std::size(layout2D),
-		pBlob->GetBufferPointer(),
-		pBlob->GetBufferSize(),
-		&m_pInputLayout);
 
 	CD3D11_BUFFER_DESC constantBufferDesc(
 		sizeof(CB_vertexshader),
