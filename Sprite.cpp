@@ -24,7 +24,7 @@ HRESULT Sprite::CreateGeometry()
 {
 	HRESULT hr = S_OK;
 
-	//Create vertices and vertex data
+	////////////////////Create vertices and vertex data
 	Vertex2D vertexData[] =
 	{
 		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
@@ -33,24 +33,26 @@ HRESULT Sprite::CreateGeometry()
 		Vertex2D(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
 	};
 
-	CD3D11_BUFFER_DESC vDesc(
-		sizeof(vertexData),
-		D3D11_BIND_VERTEX_BUFFER
-	);
+	CD3D11_BUFFER_DESC vertexBufferDesc;
+	ZeroMemory(&vertexBufferDesc, sizeof(vertexBufferDesc));
 
-	D3D11_SUBRESOURCE_DATA vData;
-	ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
-	vData.pSysMem = vertexData;
-	vData.SysMemPitch = 0;
-	vData.SysMemSlicePitch = 0;
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(Vertex2D) * ARRAYSIZE(vertexData);
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vertexBufferDesc.CPUAccessFlags = 0;
+	vertexBufferDesc.MiscFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA vertexBufferData;
+	ZeroMemory(&vertexBufferData, sizeof(vertexBufferData));
+	vertexBufferData.pSysMem = vertexData;
 
 	hr = device->CreateBuffer(
-		&vDesc,
-		&vData,
+		&vertexBufferDesc,
+		&vertexBufferData,
 		&m_pVertexBuffer
 	);
 
-	//Create indices and index data
+	///////////////////////Create indices and index data
 	UINT indexData[] =
 	{
 		0, 1, 2,
@@ -118,13 +120,13 @@ HRESULT Sprite::CreateShaders()
 		pBlob->GetBufferSize(),
 		&m_pInputLayout);
 
-	CD3D11_BUFFER_DESC cbDesc(
+	CD3D11_BUFFER_DESC constantBufferDesc(
 		sizeof(CB_vertexshader),
 		D3D11_BIND_CONSTANT_BUFFER
 	);
 
 	hr = device->CreateBuffer(
-		&cbDesc,
+		&constantBufferDesc,
 		nullptr,
 		m_pConstantBuffer.GetAddressOf()
 	);
