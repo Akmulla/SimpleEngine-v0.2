@@ -28,9 +28,9 @@ HRESULT Sprite::CreateGeometry()
 	Vertex2D vertexData[] =
 	{
 		Vertex2D(-0.5f, -0.5f, 0.0f), 
-		Vertex2D(0.5f, -0.5f, 0.0f),
-		Vertex2D(-0.5f, 0.5, 0.0f),
-		Vertex2D(0.5, 0.5, 0.0f), 
+		Vertex2D(-0.5f, 0.5f, 0.0f),
+		Vertex2D(0.5f, 0.5f, 0.0f),
+		Vertex2D(0.5f, -0.5f, 0.0f), 
 	};
 
 	CD3D11_BUFFER_DESC vertexBufferDesc;
@@ -57,8 +57,8 @@ HRESULT Sprite::CreateGeometry()
 	///////////////////////Create indices and index data
 	UINT indexData[] =
 	{
-		0, 2, 1,
-		2, 3, 1
+		0, 1, 3,
+		3, 1, 2
 	};
 
 	m_indexCount = ARRAYSIZE(indexData);
@@ -174,11 +174,9 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 
 	context->IASetIndexBuffer(
 		m_pIndexBuffer.Get(),
-		DXGI_FORMAT_R16_UINT,
+		DXGI_FORMAT_R32_UINT,
 		0
 	);
-
-
 
 
 	// Set up the vertex shader stage.
