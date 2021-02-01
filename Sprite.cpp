@@ -9,6 +9,7 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 
 	device = gfx.GetDevice();
 	context = gfx.GetContext();
+	m_pTarget = gfx.GetRenderTarget();
 	
 	//hr =  CreateGeometry();
 
@@ -129,9 +130,29 @@ HRESULT Sprite::CreateShaders()
 	return hr;
 }
 
-void Sprite::Draw(DirectX::XMMATRIX orthoMatrix)
+void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 {
+	using namespace DirectX;
+	XMMATRIX wvpMatrix = worldMatrix * ortoMatrix;
+	
+	const CB_vertexshader cb =
+	{
+		wvpMatrix
+	};
 
+	context->UpdateSubresource(
+		m_pConstantBuffer.Get(),
+		0,
+		nullptr,
+		&cb,
+		0,
+		0
+	);
+
+	//Set input layout
+	context->IASetInputLayout(m_pInputLayout.Get());
+	//Set render targets
+	context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
 
 	/*spriteBatch->Begin();
 

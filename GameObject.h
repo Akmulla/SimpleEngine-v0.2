@@ -14,7 +14,7 @@ public:
 	const DirectX::XMFLOAT3& GetPosition() const;
 	const DirectX::XMFLOAT3& GetRotation() const;
 	const DirectX::XMFLOAT3& GetScale() const;
-private:
+protected:
 	DirectX::XMFLOAT3 m_pos;
 	DirectX::XMFLOAT3 m_rot;
 	DirectX::XMFLOAT3 m_scale;

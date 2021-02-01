@@ -16,10 +16,8 @@ class Sprite
 {
 public:
 	Sprite(Graphics&, const wchar_t* spritePath, float width, float height);
-	void Draw(DirectX::XMMATRIX orthoMatrix);
+	void Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix);
 private:
-	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
-
 	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pVertexBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pIndexBuffer;
 	Microsoft::WRL::ComPtr<ID3D11VertexShader>      m_pVertexShader;
@@ -29,6 +27,7 @@ private:
 
 	ID3D11Device* device;
 	ID3D11DeviceContext* context;
+	ID3D11RenderTargetView* m_pTarget;
 
 	HRESULT CreateGeometry();
 	HRESULT CreateShaders();

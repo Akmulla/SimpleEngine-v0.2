@@ -17,6 +17,7 @@ public:
 	void EndFrame();
 	ID3D11Device* GetDevice();
 	ID3D11DeviceContext* GetContext();
+	ID3D11RenderTargetView* GetRenderTarget();
 private:
 	Microsoft::WRL::ComPtr <ID3D11Texture2D> m_pBackBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Device> m_pDevice;

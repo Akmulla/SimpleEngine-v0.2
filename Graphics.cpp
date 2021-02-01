@@ -98,3 +98,8 @@ ID3D11DeviceContext* Graphics::GetContext()
 {
 	return m_pContext.Get();
 }
+
+ID3D11RenderTargetView* Graphics::GetRenderTarget()
+{
+	return m_pTarget.Get();
+}
