@@ -7,6 +7,8 @@
 #include <SpriteBatch.h>
 #include <vector>
 #include "Vertex2D.h"
+#include "ConstantBuffers.h"
+
 #pragma comment(lib,"DirectXTK.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
@@ -14,7 +16,7 @@ class Sprite
 {
 public:
 	Sprite(Graphics&, const wchar_t* spritePath, float width, float height);
-	void Draw();
+	void Draw(DirectX::XMMATRIX orthoMatrix);
 private:
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
 

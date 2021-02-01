@@ -87,17 +87,52 @@ HRESULT Sprite::CreateShaders()
 	hr = D3DReadFileToBlob(L"VertexShader.cso", &pBlob);
 	if (FAILED(hr))
 	{
-		OutputDebugString("\nFailed to read shader cso file\n\n");
+		OutputDebugString("\nFailed to read vertex shader cso file\n\n");
 		return hr;
 	}
-		
+
 	hr = device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pVertexShader);
+
+
+	hr = D3DReadFileToBlob(L"PixelShader.cso", &pBlob);
+	if (FAILED(hr))
+	{
+		OutputDebugString("\nFailed to read pixel shader cso file\n\n");
+		return hr;
+	}
+
+	hr = device->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pPixelShader);
+
+	D3D11_INPUT_ELEMENT_DESC layout2D[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+	};
+
+	device->CreateInputLayout(layout2D,
+		(UINT)std::size(layout2D),
+		pBlob->GetBufferPointer(),
+		pBlob->GetBufferSize(),
+		&m_pInputLayout);
+
+	CD3D11_BUFFER_DESC cbDesc(
+		sizeof(CB_vertexshader),
+		D3D11_BIND_CONSTANT_BUFFER
+	);
+
+	hr = device->CreateBuffer(
+		&cbDesc,
+		nullptr,
+		m_pConstantBuffer.GetAddressOf()
+	);
 
 	return hr;
 }
 
-void Sprite::Draw()
+void Sprite::Draw(DirectX::XMMATRIX orthoMatrix)
 {
+
+
 	/*spriteBatch->Begin();
 
 	spriteBatch->Draw(shaderResource.Get(), pos);
