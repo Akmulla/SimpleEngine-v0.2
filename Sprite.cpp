@@ -57,6 +57,8 @@ HRESULT Sprite::CreateGeometry()
 		2, 1, 3
 	};
 
+	m_indexCount = ARRAYSIZE(indexData);
+
 	CD3D11_BUFFER_DESC iDesc(
 		sizeof(indexData),
 		D3D11_BIND_INDEX_BUFFER
@@ -149,10 +151,58 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		0
 	);
 
+	// Set up the IA stage by setting the input topology and layout.
+	UINT stride = sizeof(Vertex2D);
+	UINT offset = 0;
+
+	context->IASetVertexBuffers(
+		0,
+		1,
+		m_pVertexBuffer.GetAddressOf(),
+		&stride,
+		&offset
+	);
+
+	context->IASetIndexBuffer(
+		m_pIndexBuffer.Get(),
+		DXGI_FORMAT_R16_UINT,
+		0
+	);
+
+
 	//Set input layout
 	context->IASetInputLayout(m_pInputLayout.Get());
 	//Set render targets
 	context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
+	//Set primitive topology
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	// Set up the vertex shader stage.
+	context->VSSetShader(
+		m_pVertexShader.Get(),
+		nullptr,
+		0
+	);
+
+	context->VSSetConstantBuffers(
+		0,
+		1,
+		m_pConstantBuffer.GetAddressOf()
+	);
+
+	// Set up the pixel shader stage.
+	context->PSSetShader(
+		m_pPixelShader.Get(),
+		nullptr,
+		0
+	);
+
+	// Send command to graphic device
+	context->DrawIndexed(
+		m_indexCount,
+		0,
+		0
+	);
 
 	/*spriteBatch->Begin();
 

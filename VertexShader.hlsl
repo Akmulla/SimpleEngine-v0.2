@@ -20,7 +20,9 @@ struct VS_OUTPUT
 VS_OUTPUT main(VS_INPUT input)
 {
 	VS_OUTPUT output;
+
 	output.outPosition = mul(float4(input.inPos, 1.0f), wvpMatrix);
 	output.outTexCoord = input.inTexCoord;
+
 	return output;
 }

@@ -31,4 +31,6 @@ private:
 
 	HRESULT CreateGeometry();
 	HRESULT CreateShaders();
+
+	unsigned int  m_indexCount;
 };
