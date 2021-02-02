@@ -70,6 +70,8 @@ Graphics::Graphics(HWND hwnd)
 		m_pTarget.GetAddressOf()
 	);
 
+
+
 	OutputDebugString("\nRender Target view initialized\n\n");
 }
 

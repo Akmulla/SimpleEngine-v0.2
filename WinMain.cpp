@@ -7,7 +7,7 @@
 void InitScene(Scene& scene)
 {
 	Player* player = new Player();
-	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"player.png", 100,100);
+	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"mario.png", 100,100);
 	player->SetPosition({ 0.1f,0.2f,0.0f });
 
 	scene.gameObjects.push_back(player);

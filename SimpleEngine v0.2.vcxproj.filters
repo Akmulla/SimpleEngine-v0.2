@@ -79,7 +79,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="player.png" />
+    <Image Include="mario.png" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

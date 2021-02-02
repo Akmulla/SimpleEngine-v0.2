@@ -31,6 +31,7 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11Resource> m_texture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_textureView;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> m_samplerState;
 
 	ID3D11Device* m_device;
 	ID3D11DeviceContext* m_context;
