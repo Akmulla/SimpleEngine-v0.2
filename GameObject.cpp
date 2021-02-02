@@ -1,33 +1,40 @@
 #include "GameObject.h"
 
 
+GameObject::GameObject()
+{
+    m_pos = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+    m_rot = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+    m_scale = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+}
+
 void GameObject::SetPosition(const DirectX::XMFLOAT3& pos)
 {
-    this->pos = pos;
+    m_pos = pos;
 }
 
 void GameObject::SetRotation(const DirectX::XMFLOAT3& rot)
 {
-    this->rot = rot;
+    m_rot = rot;
 }
 
 void GameObject::SetScale(const DirectX::XMFLOAT3& scale)
 {
-    this->scale = scale;
+    m_scale = scale;
 }
 
 const DirectX::XMFLOAT3& GameObject::GetPosition() const
 {
-    return pos;
+    return m_pos;
 }
 
 const DirectX::XMFLOAT3& GameObject::GetRotation() const
 {
-    return rot;
+    return m_rot;
 }
 
 const DirectX::XMFLOAT3& GameObject::GetScale() const
 {
-    return scale;
+    return m_scale;
 }
 

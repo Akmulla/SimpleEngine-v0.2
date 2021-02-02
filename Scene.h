@@ -11,4 +11,5 @@ public:
 	~Scene();
 	void DoUpdate(float dt);
 	std::vector<GameObject*> gameObjects;
+	//add scene camera here?
 };

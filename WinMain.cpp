@@ -2,6 +2,16 @@
 #include "Window.h"
 #include "Timer.h"
 #include "Scene.h"
+#include "Player.h"
+
+void InitScene(Scene& scene)
+{
+	Player* player = new Player();
+	player->AssignSprite(*Window::GetMainWindow()->GetGraphics(), L"mario.png", 100,100);
+	player->SetPosition({ 0.1f,0.2f,0.0f });
+
+	scene.gameObjects.push_back(player);
+}
 
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
@@ -13,6 +23,8 @@ int CALLBACK WinMain(
 	Scene mainScene;
 	Window window(hInstance);
 
+	InitScene(mainScene);
+
 	while (true)
 	{
 		float dt = timer.Mark();
@@ -21,7 +33,7 @@ int CALLBACK WinMain(
 
 		mainScene.DoUpdate(dt);
 
-		window.DrawWindow();
+		window.DrawWindow(mainScene);
 	}
 
 	return 0;
