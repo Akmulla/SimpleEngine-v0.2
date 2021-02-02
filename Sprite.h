@@ -1,17 +1,19 @@
 #pragma once
-#include "GameObject.h"
-#include "Graphics.h"
 #include <memory>
 #include <WICTextureLoader.h>
 #include <string>
 #include <SpriteBatch.h>
 #include <vector>
+
+#include "GameObject.h"
+#include "Graphics.h"
 #include "Vertex2D.h"
 #include "ConstantBuffers.h"
 
 #pragma comment(lib,"DirectXTK.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
+
 class Sprite 
 {
 public:
@@ -25,15 +27,18 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11PixelShader>       m_pPixelShader;
 
 	Microsoft::WRL::ComPtr<ID3D11InputLayout>       m_pInputLayout;
-	
 	Microsoft::WRL::ComPtr<ID3D11Buffer>            m_pConstantBuffer;
 
-	ID3D11Device* device;
-	ID3D11DeviceContext* context;
+	Microsoft::WRL::ComPtr<ID3D11Resource> m_texture;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_textureView;
+
+	ID3D11Device* m_device;
+	ID3D11DeviceContext* m_context;
 	ID3D11RenderTargetView* m_pTarget;
 
 	HRESULT CreateGeometry();
 	HRESULT CreateShaders();
+	HRESULT CreateTexture(const wchar_t* spritePath);
 
 	unsigned int  m_indexCount;
 };

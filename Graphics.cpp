@@ -21,8 +21,8 @@ Graphics::Graphics(HWND hwnd)
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.Flags = 0;
 
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context;
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
 
 	D3D11CreateDeviceAndSwapChain(
@@ -35,13 +35,13 @@ Graphics::Graphics(HWND hwnd)
 		D3D11_SDK_VERSION,
 		&sd,
 		swapChain.GetAddressOf(),
-		device.GetAddressOf(),
+		m_device.GetAddressOf(),
 		nullptr,
-		context.GetAddressOf()
+		m_context.GetAddressOf()
 	);
 
-	device.As(&m_pDevice);
-	context.As(&m_pContext);
+	m_device.As(&m_pDevice);
+	m_context.As(&m_pContext);
 	swapChain.As(&m_pSwap);
 
 	// Configure the back buffer and viewport.

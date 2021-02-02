@@ -7,8 +7,8 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	using namespace Microsoft::WRL;
 	using namespace DirectX;
 
-	device = gfx.GetDevice();
-	context = gfx.GetContext();
+	m_device = gfx.GetDevice();
+	m_context = gfx.GetContext();
 	m_pTarget = gfx.GetRenderTarget();
 	
 	//hr =  CreateGeometry();
@@ -18,6 +18,8 @@ Sprite::Sprite(Graphics& gfx, const wchar_t* spritePath, float width, float heig
 	
 	if (SUCCEEDED(CreateShaders()))
 		OutputDebugString("\nSprite shaders created\n\n");
+
+	CreateTexture(spritePath);
 }
 
 HRESULT Sprite::CreateGeometry()
@@ -48,7 +50,7 @@ HRESULT Sprite::CreateGeometry()
 	vertexBufferData.SysMemPitch = 0;
 	vertexBufferData.SysMemSlicePitch = 0;
 
-	hr = device->CreateBuffer(
+	hr = m_device->CreateBuffer(
 		&vertexBufferDesc,
 		&vertexBufferData,
 		&m_pVertexBuffer
@@ -74,7 +76,7 @@ HRESULT Sprite::CreateGeometry()
 	iData.SysMemPitch = 0;
 	iData.SysMemSlicePitch = 0;
 
-	hr = device->CreateBuffer(
+	hr = m_device->CreateBuffer(
 		&iDesc,
 		&iData,
 		&m_pIndexBuffer
@@ -98,7 +100,7 @@ HRESULT Sprite::CreateShaders()
 		return hr;
 	}
 
-	hr = device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pVertexShader);
+	hr = m_device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pVertexShader);
 
 	D3D11_INPUT_ELEMENT_DESC layout2D[] =
 	{
@@ -106,7 +108,7 @@ HRESULT Sprite::CreateShaders()
 		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  }
 	};
 
-	hr = device->CreateInputLayout(layout2D,
+	hr = m_device->CreateInputLayout(layout2D,
 		(UINT)std::size(layout2D),
 		pBlob->GetBufferPointer(),
 		pBlob->GetBufferSize(),
@@ -120,7 +122,7 @@ HRESULT Sprite::CreateShaders()
 		return hr;
 	}
 
-	hr = device->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pPixelShader);
+	hr = m_device->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &m_pPixelShader);
 
 
 	CD3D11_BUFFER_DESC constantBufferDesc(
@@ -128,11 +130,22 @@ HRESULT Sprite::CreateShaders()
 		D3D11_BIND_CONSTANT_BUFFER
 	);
 
-	hr = device->CreateBuffer(
+	hr = m_device->CreateBuffer(
 		&constantBufferDesc,
 		nullptr,
 		m_pConstantBuffer.GetAddressOf()
 	);
+
+	return hr;
+}
+
+HRESULT Sprite::CreateTexture(const wchar_t* spritePath)
+{
+	HRESULT hr = S_OK;
+
+	hr = DirectX::CreateWICTextureFromFile(m_device, spritePath, m_texture.GetAddressOf(), m_textureView.GetAddressOf());
+
+	m_context->PSSetShaderResources(0, 1, m_textureView.GetAddressOf());
 
 	return hr;
 }
@@ -147,7 +160,7 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		wvpMatrix
 	};
 
-	context->UpdateSubresource(
+	m_context->UpdateSubresource(
 		m_pConstantBuffer.Get(),
 		0,
 		nullptr,
@@ -155,17 +168,18 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		0,
 		0
 	);
+
 	//Set input layout
-	context->IASetInputLayout(m_pInputLayout.Get());
+	m_context->IASetInputLayout(m_pInputLayout.Get());
 	//Set render targets
-	context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
+	m_context->OMSetRenderTargets(1u, &m_pTarget, nullptr);
 	//Set primitive topology
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	m_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	// Set up the IA stage by setting the input topology and layout.
 	UINT stride = sizeof(Vertex2D);
 	UINT offset = 0;
 
-	context->IASetVertexBuffers(
+	m_context->IASetVertexBuffers(
 		0,
 		1,
 		m_pVertexBuffer.GetAddressOf(),
@@ -173,7 +187,7 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		&offset
 	);
 
-	context->IASetIndexBuffer(
+	m_context->IASetIndexBuffer(
 		m_pIndexBuffer.Get(),
 		DXGI_FORMAT_R32_UINT,
 		0
@@ -181,35 +195,29 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 
 
 	// Set up the vertex shader stage.
-	context->VSSetShader(
+	m_context->VSSetShader(
 		m_pVertexShader.Get(),
 		nullptr,
 		0
 	);
 
-	context->VSSetConstantBuffers(
+	m_context->VSSetConstantBuffers(
 		0,
 		1,
 		m_pConstantBuffer.GetAddressOf()
 	);
 
 	// Set up the pixel shader stage.
-	context->PSSetShader(
+	m_context->PSSetShader(
 		m_pPixelShader.Get(),
 		nullptr,
 		0
 	);
 
 	// Send command to graphic device
-	context->DrawIndexed(
+	m_context->DrawIndexed(
 		m_indexCount,
 		0,
 		0
 	);
-
-	/*spriteBatch->Begin();
-
-	spriteBatch->Draw(shaderResource.Get(), pos);
-
-	spriteBatch->End();*/
 }
