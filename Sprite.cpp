@@ -27,10 +27,10 @@ HRESULT Sprite::CreateGeometry()
 	////////////////////Create vertices and vertex data
 	Vertex2D vertexData[] =
 	{
-		Vertex2D(-0.5f, -0.5f, 0.0f), 
-		Vertex2D(-0.5f, 0.5f, 0.0f),
-		Vertex2D(0.5f, 0.5f, 0.0f),
-		Vertex2D(0.5f, -0.5f, 0.0f), 
+		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), 
+		Vertex2D(-0.5f, 0.5f, 0.0f, 0.0f, 1.0f),
+		Vertex2D(0.5f, 0.5f, 0.0f, 1.0f,1.0f),
+		Vertex2D(0.5f, -0.5f, 0.0f, 1.0f,0.0f), 
 	};
 
 	CD3D11_BUFFER_DESC vertexBufferDesc;
@@ -102,7 +102,8 @@ HRESULT Sprite::CreateShaders()
 
 	D3D11_INPUT_ELEMENT_DESC layout2D[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0  }
+		{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  }
 	};
 
 	hr = device->CreateInputLayout(layout2D,
