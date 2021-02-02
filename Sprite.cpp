@@ -234,9 +234,29 @@ void Sprite::Draw(DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX ortoMatrix)
 		0
 	);
 
+	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
+
+
 	m_context->PSSetSamplers(0, 1, m_samplerState.GetAddressOf());
 	m_context->PSSetShaderResources(0, 1, m_textureView.GetAddressOf());
 
+	D3D11_RENDER_TARGET_BLEND_DESC rtbd = { 0 };
+	rtbd.BlendEnable = true;
+	rtbd.SrcBlend = D3D11_BLEND::D3D11_BLEND_SRC_ALPHA;
+	rtbd.DestBlend = D3D11_BLEND::D3D11_BLEND_INV_SRC_ALPHA;
+	rtbd.BlendOp = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+	rtbd.SrcBlendAlpha = D3D11_BLEND::D3D11_BLEND_ONE;
+	rtbd.DestBlendAlpha = D3D11_BLEND::D3D11_BLEND_ZERO;
+	rtbd.BlendOpAlpha = D3D11_BLEND_OP::D3D11_BLEND_OP_ADD;
+	rtbd.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE::D3D11_COLOR_WRITE_ENABLE_ALL;
+
+	D3D11_BLEND_DESC blendDesc = { 0 };
+	blendDesc.RenderTarget[0] = rtbd;
+
+
+	float blend[4] = { 0.0f, 0.0f, 0.0f,0.0f };
+	m_device->CreateBlendState(&blendDesc, blendState.GetAddressOf());
+	m_context->OMSetBlendState(blendState.Get(), blend, 0xFFFFFFFF);
 
 	// Send command to graphic device
 	m_context->DrawIndexed(
