@@ -13,11 +13,10 @@ Player::~Player()
 void Player::Draw()
 {
 	using namespace DirectX;
-	//XMMATRIX worldMatrix = XMMatrixRotationRollPitchYaw(m_rot.x, m_rot.y, m_rot.z) * 
-		//XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
+	XMMATRIX worldMatrix = XMMatrixRotationRollPitchYaw(m_rot.x, m_rot.y, m_rot.z) * XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
 
 	XMMATRIX camera = XMMatrixIdentity();
-	XMMATRIX worldMatrix = XMMatrixIdentity();
+	//XMMATRIX worldMatrix = XMMatrixIdentity();
 	sprite->Draw(worldMatrix, camera);
 }
 
