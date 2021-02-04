@@ -3,6 +3,7 @@
 Player::Player()
 {
 	sprite = nullptr;
+	m_movement = new PlayerMovement(*this, 5.0f);
 }
 
 Player::~Player()
@@ -22,6 +23,7 @@ void Player::Draw()
 
 void Player::Update(float dt)
 {
+	m_movement->Update(dt);
 }
 
 void Player::AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height)
