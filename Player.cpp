@@ -2,13 +2,14 @@
 
 Player::Player()
 {
-	sprite = nullptr;
+	m_sprite = nullptr;
 	m_movement = new PlayerMovement(*this, 5.0f);
 }
 
 Player::~Player()
 {
-	delete sprite;
+	delete m_sprite;
+	delete m_movement;
 }
 
 void Player::Draw()
@@ -18,7 +19,7 @@ void Player::Draw()
 
 	XMMATRIX camera = XMMatrixIdentity();
 	//XMMATRIX worldMatrix = XMMatrixIdentity();
-	sprite->Draw(worldMatrix, camera);
+	m_sprite->Draw(worldMatrix, camera);
 }
 
 void Player::Update(float dt)
@@ -28,5 +29,5 @@ void Player::Update(float dt)
 
 void Player::AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height)
 {
-	sprite = new Sprite(gfx, spritePath, width, height);
+	m_sprite = new Sprite(gfx, spritePath, width, height);
 }
