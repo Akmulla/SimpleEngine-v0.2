@@ -26,10 +26,10 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			switch (wParam)
 			{
 			case VK_UP:
-				Input::SetHorizontalAxis(0);
+				Input::SetVerticalAxis(0);
 				break;
 			case VK_DOWN:
-				Input::SetHorizontalAxis(0);
+				Input::SetVerticalAxis(0);
 				break;
 			case VK_RIGHT:
 				Input::SetHorizontalAxis(0);

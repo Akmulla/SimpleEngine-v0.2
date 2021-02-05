@@ -23,6 +23,13 @@ void GameObject::SetScale(const DirectX::XMFLOAT3& scale)
     m_scale = scale;
 }
 
+void GameObject::Move(const DirectX::XMFLOAT3& movement)
+{
+    m_pos.x += movement.x;
+    m_pos.y += movement.y;
+    m_pos.z += movement.z;
+}
+
 const DirectX::XMFLOAT3& GameObject::GetPosition() const
 {
     return m_pos;
