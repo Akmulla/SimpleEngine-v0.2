@@ -1,11 +1,11 @@
 #pragma once
-#include "GameObject.h"
+#include "PhysicalGameObject.h"
 #include "BoxCollider.h"
 #include "Sprite.h"
 #include "PlayerMovement.h"
 #include <string>
 
-class Player : public GameObject
+class Player : public PhysicalGameObject
 {
 public:
 	Player();

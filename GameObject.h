@@ -13,7 +13,7 @@ public:
 	void SetRotation(const DirectX::XMFLOAT3& rot);
 	void SetScale(const DirectX::XMFLOAT3& scale);
 
-	void Move(const DirectX::XMFLOAT3& movement);
+	virtual void Move(const DirectX::XMFLOAT3& movement);
 
 	const DirectX::XMFLOAT3& GetPosition() const;
 	const DirectX::XMFLOAT3& GetRotation() const;
