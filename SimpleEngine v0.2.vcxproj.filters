@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario.png" />
+    <Image Include="enemy.png" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">

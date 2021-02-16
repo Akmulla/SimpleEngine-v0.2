@@ -1,5 +1,10 @@
 #include "PhysicalGameObject.h"
 
+Rigidbody* PhysicalGameObject::GetRigidbody()
+{
+	return m_rb;
+}
+
 PhysicalGameObject::PhysicalGameObject()
 {
 	AABB box;

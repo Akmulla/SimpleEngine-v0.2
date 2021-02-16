@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "PhysicalGameObject.h"
+#include "Physics.h"
 
 Scene::Scene()
 {
@@ -25,14 +26,16 @@ void Scene::DoUpdate(float dt)
 
 void Scene::ResolvePhysics()
 {
-	std::vector<PhysicalGameObject*> objects;
+	std::vector<Rigidbody*> rigidbodies;
 
 	for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
 	{
 		PhysicalGameObject* obj = dynamic_cast<PhysicalGameObject*>(*it);
 		if (obj)
 		{
-			objects.push_back(obj);
+			rigidbodies.push_back(obj->GetRigidbody());
 		}
 	}
+
+	std::vector<CollisionData> pairs = Physics::GenerateCollisionPairs(rigidbodies);
 }

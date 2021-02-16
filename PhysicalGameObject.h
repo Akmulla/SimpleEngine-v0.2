@@ -5,8 +5,10 @@
 
 class PhysicalGameObject : public GameObject
 {
-public:
+private:
 	Rigidbody* m_rb;
+public:
+	Rigidbody* GetRigidbody();
 
 	PhysicalGameObject();
 	~PhysicalGameObject();
