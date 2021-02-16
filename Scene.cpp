@@ -37,5 +37,9 @@ void Scene::ResolvePhysics()
 		}
 	}
 
+
+	//probably move to physics class from here
 	std::vector<CollisionData> pairs = Physics::GenerateCollisionPairs(rigidbodies);
+
+
 }

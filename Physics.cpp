@@ -4,9 +4,25 @@ std::vector<CollisionData> Physics::GenerateCollisionPairs(const std::vector<Rig
 {
 	std::vector<CollisionData> result;
 
-	for (auto it = physicalObjects.begin(); it != physicalObjects.end(); ++it)
+	for (auto i = physicalObjects.begin(); i != physicalObjects.end(); ++i)
 	{
-		AABB box = (*it)->m_AABB;
+		for (auto j = physicalObjects.begin(); j != physicalObjects.end(); ++j)
+		{
+			if (i == j)
+				continue;
+
+			AABB a = (*i)->m_AABB;
+			AABB b = (*j)->m_AABB;
+
+			if (CheckAABBtoAABB(a, b))
+			{
+				CollisionData data;
+				data.A = *i;
+				data.B = *j;
+				result.push_back(data);
+			}
+		}
+		
 
 	}
 
@@ -24,4 +40,15 @@ bool Physics::CheckAABBtoAABB(AABB& a, AABB& b)
 
 	// No separating axis found, therefor there is at least one overlapping axis
 	return true;
+}
+
+bool Physics::SortPairs(CollisionData lhs, CollisionData rhs)
+{
+	if (lhs.A < rhs.A)
+		return true;
+
+	if (lhs.A == rhs.A)
+		return lhs.B < rhs.B;
+
+	return false;
 }
