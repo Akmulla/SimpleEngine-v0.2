@@ -40,11 +40,11 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -91,6 +91,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

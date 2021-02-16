@@ -92,7 +92,7 @@ Window::~Window()
 
 void Window::DrawWindow(Scene& scene)
 {
-	ColorRGBA c{ 0,0,0,0 };
+	ColorRGBA c{ 255,255,255,0 };
 	graphics->ClearBackground(c);
 
 	for (auto it = scene.gameObjects.begin(); it != scene.gameObjects.end(); ++it)

@@ -1,6 +1,5 @@
 #pragma once
 #include "PhysicalGameObject.h"
-#include "BoxCollider.h"
 #include "Sprite.h"
 #include "PlayerMovement.h"
 #include <string>
