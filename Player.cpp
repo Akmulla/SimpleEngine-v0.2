@@ -22,7 +22,7 @@ void Player::Draw()
 		XMMatrixTranslation(m_pos.x, m_pos.y , m_pos.z);
 
 	XMMATRIX camera = XMMatrixIdentity();
-	//XMMATRIX worldMatrix = XMMatrixIdentity();
+	
 	m_sprite->Draw(worldMatrix, camera);
 }
 

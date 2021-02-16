@@ -3,7 +3,6 @@
 #include "Rigidbody.h"
 
 
-
 class PhysicalGameObject : public GameObject
 {
 public:
@@ -11,4 +10,6 @@ public:
 
 	PhysicalGameObject();
 	~PhysicalGameObject();
+
+	//OnCollisionEnter()
 };
