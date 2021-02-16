@@ -1,8 +1,8 @@
 #include "PhysicalGameObject.h"
 
-PhysicalGameObject::PhysicalGameObject(PhysicalParameters parameters)
+PhysicalGameObject::PhysicalGameObject()
 {
-	m_rb = new Rigidbody(parameters);
+	m_rb = new Rigidbody();
 }
 
 PhysicalGameObject::~PhysicalGameObject()

@@ -9,6 +9,6 @@ class PhysicalGameObject : public GameObject
 public:
 	Rigidbody* m_rb;
 
-	PhysicalGameObject(PhysicalParameters parameters);
+	PhysicalGameObject();
 	~PhysicalGameObject();
 };

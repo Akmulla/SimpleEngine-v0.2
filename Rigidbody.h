@@ -7,6 +7,7 @@ public:
 	DirectX::XMFLOAT2 leftBot;
 	DirectX::XMFLOAT2 rightTop;
 
+	AABB() : leftBot({ -1,-1 }), rightTop({ 1,1 }) {}
 	AABB(DirectX::XMFLOAT2 leftBot, DirectX::XMFLOAT2 rightTop) : leftBot(leftBot), rightTop(rightTop)  {}
 
 	AABB(DirectX::XMFLOAT2 center, float width, float height)
@@ -26,19 +27,15 @@ public:
 	}
 };
 
-struct PhysicalParameters
-{
-	float mass;
-};
-
 class Rigidbody
 {
 public:
-	DirectX::XMFLOAT2 velocity;
-	PhysicalParameters parameters;
+	DirectX::XMFLOAT2 m_velocity;
+	float m_mass;
 
-	Rigidbody(PhysicalParameters);
-private:
+	Rigidbody();
+	~Rigidbody();
+	//Rigidbody(float m_mass, AABB box);
 	AABB m_AABB;
 };
 
