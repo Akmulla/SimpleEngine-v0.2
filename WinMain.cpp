@@ -31,6 +31,8 @@ int CALLBACK WinMain(
 
 		window.UpdateWindowsMessages();
 
+		mainScene.ResolvePhysics();
+
 		mainScene.DoUpdate(dt);
 
 		window.DrawWindow(mainScene);
