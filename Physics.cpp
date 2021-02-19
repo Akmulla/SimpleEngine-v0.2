@@ -1,5 +1,6 @@
 #include "Physics.h"
 
+
 std::vector<CollisionData> Physics::GenerateCollisionPairs(const std::vector<Rigidbody*>& physicalObjects)
 {
 	std::vector<CollisionData> result;
@@ -22,11 +23,36 @@ std::vector<CollisionData> Physics::GenerateCollisionPairs(const std::vector<Rig
 				result.push_back(data);
 			}
 		}
-		
-
 	}
 
 	return result;
+}
+
+std::vector<CollisionData> Physics::RemoveDuplicates(std::vector<CollisionData> collisionData)
+{
+	std::vector<CollisionData> uniquePairs;
+
+	for (int i = 0; i != collisionData.size(); ++i)
+	{
+		bool pairIsUnique = true;
+
+		for (int j = 0; j < uniquePairs.size(); ++j)
+		{
+			if (uniquePairs[j].A == collisionData[i].B && uniquePairs[j].B == collisionData[i].A)
+			{
+				pairIsUnique = false;
+				break;
+			}
+
+			
+		}
+		if (pairIsUnique)
+		{
+			uniquePairs.push_back(collisionData[i]);
+		}
+	}
+
+	return uniquePairs;
 }
 
 bool Physics::CheckAABBtoAABB(AABB& a, AABB& b)
@@ -42,13 +68,4 @@ bool Physics::CheckAABBtoAABB(AABB& a, AABB& b)
 	return true;
 }
 
-bool Physics::SortPairs(CollisionData lhs, CollisionData rhs)
-{
-	if (lhs.A < rhs.A)
-		return true;
 
-	if (lhs.A == rhs.A)
-		return lhs.B < rhs.B;
-
-	return false;
-}
