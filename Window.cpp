@@ -1,7 +1,12 @@
 #include "Window.h"
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))
+		return true;
+
 	if (uMsg == WM_KEYDOWN)
 	{
 		switch (wParam)
@@ -100,6 +105,10 @@ Window::~Window()
 
 void Window::DrawWindow(Scene& scene)
 {
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
 	ColorRGBA c{ 255,255,255,0 };
 	graphics->ClearBackground(c);
 
@@ -108,9 +117,9 @@ void Window::DrawWindow(Scene& scene)
 		(*it)->Draw();
 	}
 
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+	
+
+	//ImGui::ShowDemoWindow();
 
 	ImGui::Begin("Hello, world!");
 	ImGui::Text("This is some useful text.");
