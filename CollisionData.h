@@ -1,5 +1,7 @@
 #pragma once
-#include "Rigidbody.h"
+//#include "Rigidbody.h"
+
+class Rigidbody;
 
 struct CollisionData
 {

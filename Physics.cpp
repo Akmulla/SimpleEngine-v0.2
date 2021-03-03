@@ -43,8 +43,6 @@ std::vector<CollisionData> Physics::RemoveDuplicates(std::vector<CollisionData> 
 				pairIsUnique = false;
 				break;
 			}
-
-			
 		}
 		if (pairIsUnique)
 		{

@@ -17,3 +17,8 @@ PhysicalGameObject::~PhysicalGameObject()
 {
 	delete m_rb;
 }
+
+void PhysicalGameObject::OnCollision(CollisionData data)
+{
+
+}

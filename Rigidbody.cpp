@@ -10,6 +10,8 @@ Rigidbody::Rigidbody()
 	m_mass = 1;
 	//m_AABB = new AABB({ -1, -1 }, { 1, 1 });
 	m_velocity = { 0,0 };
+
+	collisionCallback = [](CollisionData data) {};
 }
 
 Rigidbody::Rigidbody(AABB box)
@@ -18,6 +20,13 @@ Rigidbody::Rigidbody(AABB box)
 	//m_AABB = new AABB({ -1, -1 }, { 1, 1 });
 	m_velocity = { 0,0 };
 	m_AABB = box;
+
+	collisionCallback = [](CollisionData data) {  };
+}
+
+void Rigidbody::OnCollision(CollisionData data)
+{
+	collisionCallback(data);
 }
 
 Rigidbody::~Rigidbody()

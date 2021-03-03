@@ -5,7 +5,8 @@
 
 class PhysicalGameObject : public GameObject
 {
-private:
+protected:
+	virtual void OnCollision(CollisionData);
 	Rigidbody* m_rb;
 public:
 	Rigidbody* GetRigidbody();

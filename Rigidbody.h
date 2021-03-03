@@ -1,5 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
+#include "CollisionData.h"
+#include <functional>
 
 struct AABB
 {
@@ -34,10 +36,12 @@ public:
 	DirectX::XMFLOAT2 m_velocity;
 	float m_mass;
 
+	std::function<void(CollisionData)> collisionCallback;
+
 	Rigidbody();
 	~Rigidbody();
 	Rigidbody(AABB box);
-	//Rigidbody(float m_mass, AABB box);
+	void OnCollision(CollisionData);
 	AABB m_AABB;
 };
 

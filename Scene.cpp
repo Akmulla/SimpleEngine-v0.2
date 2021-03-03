@@ -43,4 +43,10 @@ void Scene::ResolvePhysics()
 
 	std::vector<CollisionData> unique_pairs = Physics::RemoveDuplicates(pairs);
 
+	for (auto it = unique_pairs.begin(); it != unique_pairs.end(); ++it)
+	{
+		it->A->OnCollision(*it);
+		it->B->OnCollision(*it);
+	}
+
 }
