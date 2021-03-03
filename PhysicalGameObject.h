@@ -10,9 +10,8 @@ protected:
 	Rigidbody* m_rb;
 public:
 	Rigidbody* GetRigidbody();
+	void UpdateAABB();
 
 	PhysicalGameObject();
 	~PhysicalGameObject();
-
-	//OnCollisionEnter()
 };

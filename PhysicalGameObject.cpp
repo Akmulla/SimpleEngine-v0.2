@@ -20,5 +20,15 @@ PhysicalGameObject::~PhysicalGameObject()
 
 void PhysicalGameObject::OnCollision(CollisionData data)
 {
+	/////
+}
 
+void PhysicalGameObject::UpdateAABB()
+{
+	AABB& aabb = m_rb->m_AABB;
+	//float width = aabb.GetWidth();
+	//float height = aabb.GetHeight();
+
+	aabb.leftBot = { m_pos.x - m_scale.x / 2.0f, m_pos.y - m_scale.y / 2.0f };
+	aabb.rightTop = { m_pos.x + m_scale.x / 2.0f, m_pos.y + m_scale.y / 2.0f };
 }

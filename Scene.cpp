@@ -33,10 +33,10 @@ void Scene::ResolvePhysics()
 		PhysicalGameObject* obj = dynamic_cast<PhysicalGameObject*>(*it);
 		if (obj)
 		{
+			obj->UpdateAABB();
 			rigidbodies.push_back(obj->GetRigidbody());
 		}
 	}
-
 
 	//probably move to physics class from here
 	std::vector<CollisionData> pairs = Physics::GenerateCollisionPairs(rigidbodies);
