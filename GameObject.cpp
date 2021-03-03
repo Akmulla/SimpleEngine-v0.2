@@ -5,7 +5,7 @@ GameObject::GameObject()
 {
     m_pos = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
     m_rot = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
-    m_scale = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+    m_scale = DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f);
 }
 
 void GameObject::SetPosition(const DirectX::XMFLOAT3& pos)

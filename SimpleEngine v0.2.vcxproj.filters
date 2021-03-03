@@ -31,11 +31,20 @@
     <ClCompile Include="PlayerMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicalGameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -72,6 +81,21 @@
     <ClInclude Include="PlayerMovement.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicalGameObject.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionData.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -86,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="mario.png" />
+    <Image Include="enemy.png" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
@@ -94,5 +119,8 @@
     <FxCompile Include="PixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

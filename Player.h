@@ -1,11 +1,11 @@
 #pragma once
-#include "GameObject.h"
-#include "BoxCollider.h"
+#include "PhysicalGameObject.h"
 #include "Sprite.h"
 #include "PlayerMovement.h"
 #include <string>
+#include <functional>
 
-class Player : public GameObject
+class Player : public PhysicalGameObject
 {
 public:
 	Player();
@@ -13,6 +13,7 @@ public:
 	void Draw() override;
 	void Update(float dt) override;
 	void AssignSprite(Graphics& gfx, const wchar_t* spritePath, int width, int height);
+	void OnCollision(CollisionData) override;
 private:
 	Sprite* m_sprite;
 	PlayerMovement* m_movement;
