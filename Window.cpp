@@ -82,6 +82,10 @@ Window::Window(HINSTANCE hInstance)
 
 	this->graphics = std::unique_ptr<Graphics>(new Graphics(hwnd));
 
+	ImGui::CreateContext();
+	ImGui::StyleColorsDark();
+	ImGui_ImplDX11_Init(graphics->GetDevice(), graphics->GetContext());
+
 	ShowWindow(hwnd, SW_SHOW);
 }
 

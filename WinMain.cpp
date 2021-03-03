@@ -28,6 +28,8 @@ int CALLBACK WinMain(
 	Scene mainScene;
 	Window window(hInstance);
 
+
+
 	InitScene(mainScene);
 
 	while (true)
