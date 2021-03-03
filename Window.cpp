@@ -82,11 +82,15 @@ Window::Window(HINSTANCE hInstance)
 
 	this->graphics = std::unique_ptr<Graphics>(new Graphics(hwnd));
 
+	ShowWindow(hwnd, SW_SHOW);
+	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
+	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX11_Init(graphics->GetDevice(), graphics->GetContext());
 
-	ShowWindow(hwnd, SW_SHOW);
+	
 }
 
 Window::~Window()
@@ -103,6 +107,22 @@ void Window::DrawWindow(Scene& scene)
 	{
 		(*it)->Draw();
 	}
+
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	ImGui::Begin("Hello, world!");
+	ImGui::Text("This is some useful text.");
+	ImGui::End();
+	ImGui::Render();
+
+	//ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	//const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
+	//static ID3D11RenderTargetView* g_mainRenderTargetView = graphics->GetRenderTarget();
+	//graphics->GetContext()->OMSetRenderTargets(1, &g_mainRenderTargetView, NULL);
+	//graphics->GetContext()->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	graphics->EndFrame();
 }
