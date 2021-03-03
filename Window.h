@@ -8,6 +8,9 @@
 #include "Input.h"
 #include "Scene.h"
 #include "GameObject.h"
+#include "imgui/imgui.h"
+#include "imgui/backends/imgui_impl_sdl.h"
+#include "imgui/backends/imgui_impl_dx11.h"
 
 class Window
 {
